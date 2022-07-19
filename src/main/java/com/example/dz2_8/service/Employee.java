@@ -1,0 +1,62 @@
+package com.example.dz2_8.service;
+
+import java.util.Objects;
+
+public class Employee {
+
+    private final String firstName;
+    private final String lastName;
+    private final String patronymic;
+    private final double salary;
+    private final int department;
+
+    public Employee(String firstName, String lastName, String patronymic, double salary, int department) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.patronymic = patronymic;
+        this.salary = salary;
+        this.department = department;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getPatronymic() {
+        return patronymic;
+    }
+
+    public double getSalary() {
+        return salary;
+    }
+
+    public int getDepartment() {
+        return department;
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (this == other) {
+            return true;
+        }
+        if (other == null || this.getClass() != other.getClass()) {
+            return false;
+        }
+        Employee c2 = (Employee) other;
+        return lastName.equals(c2.lastName) && firstName.equals(c2.firstName) && patronymic.equals(c2.patronymic);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(lastName, firstName, patronymic);
+    }
+
+    @Override
+    public String toString() {
+        return "Фамилия: " + lastName + ". Имя: " + firstName +". Отчество: " + patronymic;
+    }
+}
