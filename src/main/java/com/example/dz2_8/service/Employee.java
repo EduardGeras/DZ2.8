@@ -7,15 +7,11 @@ public class Employee {
     private final String firstName;
     private final String lastName;
     private final String patronymic;
-    private final double salary;
-    private final int department;
 
-    public Employee(String firstName, String lastName, String patronymic, double salary, int department) {
+    public Employee(String firstName, String lastName, String patronymic) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.patronymic = patronymic;
-        this.salary = salary;
-        this.department = department;
     }
 
     public String getLastName() {
@@ -30,13 +26,6 @@ public class Employee {
         return patronymic;
     }
 
-    public double getSalary() {
-        return salary;
-    }
-
-    public int getDepartment() {
-        return department;
-    }
 
     @Override
     public boolean equals(Object other) {
