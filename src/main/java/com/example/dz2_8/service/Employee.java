@@ -7,11 +7,15 @@ public class Employee {
     private final String firstName;
     private final String lastName;
     private final String patronymic;
+    private final double salary;
+    private final int departament;
 
-    public Employee(String firstName, String lastName, String patronymic) {
+    public Employee(String firstName, String lastName, String patronymic, double salary, int departament) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.patronymic = patronymic;
+        this.salary = salary;
+        this.departament = departament;
     }
 
     public String getLastName() {
@@ -26,6 +30,13 @@ public class Employee {
         return patronymic;
     }
 
+    public double getSalary() {
+        return salary;
+    }
+
+    public int getDepartament() {
+        return departament;
+    }
 
     @Override
     public boolean equals(Object other) {
@@ -48,4 +59,5 @@ public class Employee {
     public String toString() {
         return "Фамилия: " + lastName + ". Имя: " + firstName +". Отчество: " + patronymic;
     }
+
 }

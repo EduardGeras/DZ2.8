@@ -1,32 +1,27 @@
 package com.example.dz2_8.controller;
 
-import com.example.dz2_8.service.Departament;
-import com.example.dz2_8.service.EmployeeService;
+//import com.example.dz2_8.service.Departament;
+import com.example.dz2_8.service.DepartamentService;
+import com.example.dz2_8.service.Employee;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/departments")
+@RequestMapping("/departaments")
 
 public class DepartamentController {
 
 
-    private final DepartamentController departamentServiceImpl;
+    private final DepartamentService departamentService;
 
-    public DepartamentController(DepartamentController departamentServiceImpl) {
-        this.departamentServiceImpl = departamentServiceImpl;
+    public DepartamentController(DepartamentService departamentService) {
+        this.departamentService = departamentService;
     }
 
-
     @GetMapping("/max-salary")
-    public Departament maxSalary(@RequestParam("lastName") String lastName,
-                                 @RequestParam("firstName") String firstName,
-                                 @RequestParam("patronymic") String patronymic,
-                                 @RequestParam("salary") double salary,
-                                 @RequestParam("departament") int departament) {
-
-        return departamentServiceImpl.maxSalary(lastName, firstName, patronymic, salary, departament);
+    public Employee maxSalary(@RequestParam ("departament") int department) {
+        return departamentService.maxSalary(department);
     }
 }
