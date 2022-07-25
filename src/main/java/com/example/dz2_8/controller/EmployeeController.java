@@ -12,6 +12,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/employee")
+
 public class EmployeeController {
     @Autowired
     private final EmployeeServiceImpl employeeService;
@@ -23,8 +24,10 @@ public class EmployeeController {
     @GetMapping("/add")      // добавить сотрудника
     public Employee addEmployee(@RequestParam("lastName") String lastName,
                                 @RequestParam("firstName") String firstName,
-                                @RequestParam("patronymic") String patronymic) {
-        return employeeService.add(lastName, firstName, patronymic);
+                                @RequestParam("patronymic") String patronymic,
+                                @RequestParam("salary") double salary,
+                                @RequestParam("departament") int departament) {
+        return employeeService.add(firstName, lastName, patronymic, salary, departament);
     }
     @GetMapping("/delete")    // удалить сотрудника
     public Employee deleteEmployee(@RequestParam("lastName") String lastName,
@@ -38,7 +41,7 @@ public class EmployeeController {
                                  @RequestParam("patronymic") String patronymic) {
         return employeeService.find(lastName, firstName, patronymic);
     }
-    @GetMapping      // список сотрудников
+    @GetMapping ("/all")     // список сотрудников
     public List<Employee> getAll(){
         return employeeService.getAll();
     }

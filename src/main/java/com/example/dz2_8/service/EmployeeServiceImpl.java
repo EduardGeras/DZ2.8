@@ -13,11 +13,16 @@ import java.util.Map;
 @Service
 public class EmployeeServiceImpl implements EmployeeService{
     private static final int limit = 10;
+
     public static Map<String, Employee> employees = new HashMap<>();
 
+    public static Map<String, Employee> getEmployees() {
+        return employees;
+    }
+
 @Override
-    public Employee add(String firstName, String lastName, String patronymic) {
-        Employee employee = new Employee(firstName, lastName, patronymic);
+    public Employee add(String firstName, String lastName, String patronymic, double salary, int department) {
+        Employee employee = new Employee(firstName, lastName, patronymic, salary, department);
         String key = getKey(firstName, lastName, patronymic);
         if (employees.containsKey(key)) {
             throw new EmployeeAlreadyAddedException("Такой сотрудник уже существует");
