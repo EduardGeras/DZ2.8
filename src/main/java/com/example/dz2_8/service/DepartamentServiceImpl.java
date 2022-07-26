@@ -3,7 +3,10 @@ package com.example.dz2_8.service;
 import com.example.dz2_8.exception.EmployeeNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.List;
+import java.util.stream.Collectors;
 
 
 @Service
@@ -25,21 +28,27 @@ public class DepartamentServiceImpl implements DepartamentService{
                 .orElseThrow(() -> new EmployeeNotFoundException(""));
 
     }
-/*
     @Override
-    public Departament minSalary(String firstName, String lastName, String patronymic, double salary, int departament) {
-        return null;
+    public Employee minSalary(int departament) {
+        return employeeService.getEmployees()
+                .values()
+                .stream()
+                .filter(e -> e.getDepartament() == departament)
+                .min(Comparator.comparingDouble(Employee::getSalary))
+                .orElseThrow(() -> new EmployeeNotFoundException(""));
+
+    }
+    @Override
+    public List <Employee> departmentEmployees(int departament) {
+        return employeeService.getEmployees()
+                .values()
+                .stream()
+                .filter(e -> e.getDepartament() == departament)
+                .collect(Collectors.toList());
+
+    }
+    public List <Employee> allEmployees(){
+        return new ArrayList<>(employeeService.getEmployees().values());
     }
 
-    @Override
-    public Departament departmentEmployees(String firstName, String lastName, String patronymic, double salary, int departament) {
-        return null;
-    }
-
-    @Override
-    public Departament allEmployees(String firstName, String lastName, String patronymic, double salary, int departament) {
-        return null;
-    }
-
-}*/
 }
