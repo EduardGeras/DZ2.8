@@ -1,5 +1,6 @@
 package com.example.dz2_8.service;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 import com.example.dz2_8.exception.EmployeeAlreadyAddedException;
 import com.example.dz2_8.exception.EmployeeNotFoundException;
@@ -13,25 +14,25 @@ import java.util.Map;
 @Service
 public class EmployeeServiceImpl implements EmployeeService{
     private static final int limit = 10;
-
     public static Map<String, Employee> employees = new HashMap<>();
-
     public static Map<String, Employee> getEmployees() {
         return employees;
     }
-
 @Override
     public Employee add(String firstName, String lastName, String patronymic, double salary, int department) {
-        Employee employee = new Employee(firstName, lastName, patronymic, salary, department);
-        String key = getKey(firstName, lastName, patronymic);
-        if (employees.containsKey(key)) {
-            throw new EmployeeAlreadyAddedException("Такой сотрудник уже существует");
+        if (StringUtils.isAlpha(firstName) & StringUtils.isAlpha(lastName) & StringUtils.isAlpha(patronymic)) {
+            Employee employee = new Employee(StringUtils.capitalize(firstName), StringUtils.capitalize(lastName), StringUtils.capitalize(patronymic), salary, department);
+            String key = getKey(firstName, lastName, patronymic);
+            if (employees.containsKey(key)) {
+                throw new EmployeeAlreadyAddedException("Такой сотрудник уже существует");
+            }
+            if (employees.size() < limit) {
+                employees.put(key, employee);
+                return employee;
+            }
+            throw new EmployeeStoragelsFullException("Штат сотрудников полный. Кого увольняем?)");
         }
-        if (employees.size() < limit) {
-            employees.put(key,employee);
-            return employee;
-        }
-        throw new EmployeeStoragelsFullException("Штат сотрудников полный. Кого увольняем?)");
+        throw new RuntimeException();
     }
     @Override
     public Employee delete(String firstName, String lastName, String patronymic) {
@@ -49,28 +50,10 @@ public class EmployeeServiceImpl implements EmployeeService{
         }
         return employees.get(key);
     }
-
     public List<Employee> getAll() {
         return new ArrayList<>(employees.values());
     }
     private String getKey(String firstName, String lastName, String patronymic) {
         return firstName + " " + lastName + " " + patronymic;
     }
-
-//    public abstract Employee maxSalary(int departament);
-
-/*    @Override
-    public Employee add(String firstName, String lastName, String patronymic, double salary, int department) {
-        return null;
-    }
-
-    @Override
-    public Employee delete(String firstName, String lastName, String patronymic, double salary, int department) {
-        return null;
-    }
-
-    @Override
-    public Employee find(String firstName, String lastName, String patronymic, double salary, int department) {
-        return null;
-    }*/
 }

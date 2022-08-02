@@ -1,6 +1,5 @@
 package com.example.dz2_8.controller;
 
-//import com.example.dz2_8.service.Departament;
 import com.example.dz2_8.service.DepartamentService;
 import com.example.dz2_8.service.Employee;
 import org.springframework.web.bind.annotation.GetMapping;

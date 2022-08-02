@@ -8,7 +8,6 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
-
 @Service
 public class DepartamentServiceImpl implements DepartamentService{
     private final EmployeeServiceImpl employeeService;
@@ -16,7 +15,6 @@ public class DepartamentServiceImpl implements DepartamentService{
     public DepartamentServiceImpl(EmployeeServiceImpl employeeService) {
         this.employeeService = employeeService;
     }
-
 
     @Override
     public Employee maxSalary(int departament) {
@@ -26,7 +24,6 @@ public class DepartamentServiceImpl implements DepartamentService{
                 .filter(e -> e.getDepartament() == departament)
                 .max(Comparator.comparingDouble(Employee::getSalary))
                 .orElseThrow(() -> new EmployeeNotFoundException(""));
-
     }
     @Override
     public Employee minSalary(int departament) {
@@ -36,7 +33,6 @@ public class DepartamentServiceImpl implements DepartamentService{
                 .filter(e -> e.getDepartament() == departament)
                 .min(Comparator.comparingDouble(Employee::getSalary))
                 .orElseThrow(() -> new EmployeeNotFoundException(""));
-
     }
     @Override
     public List <Employee> departmentEmployees(int departament) {
@@ -45,10 +41,8 @@ public class DepartamentServiceImpl implements DepartamentService{
                 .stream()
                 .filter(e -> e.getDepartament() == departament)
                 .collect(Collectors.toList());
-
     }
     public List <Employee> allEmployees(){
         return new ArrayList<>(employeeService.getEmployees().values());
     }
-
 }
