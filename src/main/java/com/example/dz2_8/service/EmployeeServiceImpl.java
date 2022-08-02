@@ -1,5 +1,6 @@
 package com.example.dz2_8.service;
 
+import com.example.dz2_8.exception.EmployeeException;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 import com.example.dz2_8.exception.EmployeeAlreadyAddedException;
@@ -20,7 +21,7 @@ public class EmployeeServiceImpl implements EmployeeService{
     }
 @Override
     public Employee add(String firstName, String lastName, String patronymic, double salary, int department) {
-        if (StringUtils.isAlpha(firstName) & StringUtils.isAlpha(lastName) & StringUtils.isAlpha(patronymic)) {
+        if (StringUtils.isAlpha(firstName) && StringUtils.isAlpha(lastName) && StringUtils.isAlpha(patronymic)) {
             Employee employee = new Employee(StringUtils.capitalize(firstName), StringUtils.capitalize(lastName), StringUtils.capitalize(patronymic), salary, department);
             String key = getKey(firstName, lastName, patronymic);
             if (employees.containsKey(key)) {
@@ -32,7 +33,7 @@ public class EmployeeServiceImpl implements EmployeeService{
             }
             throw new EmployeeStoragelsFullException("Штат сотрудников полный. Кого увольняем?)");
         }
-        throw new RuntimeException();
+        throw new EmployeeException();
     }
     @Override
     public Employee delete(String firstName, String lastName, String patronymic) {
